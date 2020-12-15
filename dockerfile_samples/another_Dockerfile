@@ -1,0 +1,9 @@
+FROM python:3.7.2-alpine3.8
+LABEL maintainer="jeffmshale@gmail.com"
+RUN apk add --update git                                   # Устанавливаем зависимости
+WORKDIR /usr/src/my_app_directory                          # Задаём текущую рабочую директорию
+COPY . .                                                   # Копируем код из локального контекста в рабочую директорию образа
+ARG my_var=my_default_value                                # Задаём значение по умолчанию для переменной
+ENTRYPOINT ["python", "./app/my_script.py", "my_var"]      # Настраиваем команду, которая должна быть запущена в контейнере во время его выполнения
+EXPOSE 8000                                                # Открываем порты
+VOLUME /my_volume                                          # Создаём том для хранения данных               
